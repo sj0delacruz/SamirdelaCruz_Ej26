@@ -1,13 +1,13 @@
-all: euler_01.dat euler_001.dat euler_0001.dat rompeku_01.dat rompeku_001.dat rompeku_001.dat solucion_01.png solucion_001.png solucion_0001.png
+all: euler_0o5_ec1.dat rompeku_0o5_ec1.dat rana_0o5_ec1.dat graf_sol_0o5_ec1.png
 
-%.png: %.dat graf.py
-	python3 graf.py
+%.png: %.dat grafica_ec1.py
+	python3 grafica_ec1.py
 
-%.dat: sol.x
-	./sol.x
+%.dat: sol_ec1.x
+	./sol_ec1.x
 
-sol.x: solucion_t.cpp
-	g++ solucion_t.cpp -o sol.x
+sol_ec1.x: solucion_ec1.cpp
+	g++ solucion_ec1.cpp -o sol_ec1.x
 
 clean:
 	rm -rf *.x *.dat *.png
