@@ -7,6 +7,7 @@ using namespace std;
 
 void solucion_euler(float x1, float x2, float dx, float w, string nombreArc);
 void solucion_rompekukas(float x1, float x2, float dx, float w, string nombreArc);
+void solucion_rompekukasa(float x1, float x2, float dx, float w, string nombreArc);
 void solucion_salt_rana(float x1, float x2, float dx, float w, string nombreArc);
 
 int main(){
@@ -32,8 +33,29 @@ void solucion_euler(float x1, float x2, float dx, float w, string nombreArc){
         outfile << x << " " << y_n << " " << yp_n <<endl;
         y_n=y_n1,yp_n=yp_n1,x+=dx;
     }
+    outfile.close();
 }
 
+void solucion_rompekukasp(float x1, float x2, float dx, float w, string nombreArc){
+    float x=x1,y_n=1.0,yp_n=0;
+    float y_n1,yp_n1;
+    float f,f0,f1,f2,f3;
+    ofstream outfile;
+    outfile.open(nombreArc);
+
+    while(x<=x2){
+        f0=-pow(w,2)*y_n;
+        f1=-pow(w,2)*(y_n+dx*f0/2);
+        f2=-pow(w,2)*(y_n+dx*f1/2);
+        f3=-pow(w,2)*(y_n+dx*f2/2);
+        f=(f0+2*f1+2*f2+f3)/6;
+        yp_n1=yp_n+f*dx;
+        y_n1=y_n+yp_n*dx;
+        outfile << x << " " << y_n << " " << yp_n <<endl;
+        y_n=y_n1,yp_n=yp_n1,x+=dx;
+    }
+    outfile.close();
+}
 void solucion_rompekukas(float x1, float x2, float dx, float w, string nombreArc){
     float x=x1,y_n=1.0,yp_n=0;
     float y_n1,yp_n1;
@@ -52,6 +74,29 @@ void solucion_rompekukas(float x1, float x2, float dx, float w, string nombreArc
         outfile << x << " " << y_n << " " << yp_n <<endl;
         y_n=y_n1,yp_n=yp_n1,x+=dx;
     }
+    outfile.close();
+}
+void solucion_rompekukasa(float x1, float x2, float dx, float w, string nombreArc){
+    float x=x1,y_n=1.0,yp_n=0;
+    float y_n1,yp_n1,y_n0o5;
+    float f,f0,f1,f2,f3;
+    ofstream outfile;
+    outfile.open(nombreArc);
+
+    while(x<=x2){
+        
+        y_n0o5=y_n+yp_n*dx*0.5;
+        f0=-pow(w,2)*y_n0o5;
+        f1=-pow(w,2)*(y_n0o5+dx*f0/2);
+        f2=-pow(w,2)*(y_n0o5+dx*f1/2);
+        f3=-pow(w,2)*(y_n0o5+dx*f2/2);
+        f=(f0+2*f1+2*f2+f3)/6;
+        yp_n1=yp_n+f*dx;
+        y_n1=y_n0o5+yp_n*dx*0.5;
+        outfile << x << " " << y_n << " " << yp_n <<endl;
+        y_n=y_n1,yp_n=yp_n1,x+=dx;
+    }
+    outfile.close();
 }
 
 void solucion_salt_rana(float x1, float x2, float dx, float w, string nombreArc){
@@ -67,4 +112,5 @@ void solucion_salt_rana(float x1, float x2, float dx, float w, string nombreArc)
         outfile << x << " " << y_n << " " << yp_n <<endl;
         y_n=y_n1,yp_n=yp_n1,x+=dx;
     }
+    outfile.close();
 }
